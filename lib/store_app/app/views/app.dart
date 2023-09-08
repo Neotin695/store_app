@@ -1,10 +1,10 @@
-import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/breakpoint.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:sizer/sizer.dart';
+import 'package:store_app/store_app/home/widgets/home_page.dart';
 
 import '../../../core/language/l10n/l10n.dart';
 import '../../../core/language/lang.dart';
@@ -56,10 +56,7 @@ class _AppViewState extends State<AppView> {
       builder: (context, orientation, deviceType) => MaterialApp(
         key: key,
         debugShowCheckedModeBanner: false,
-        home: FlowBuilder<AppStatus>(
-          state: context.select((AppBloc bloc) => bloc.state.status),
-          onGeneratePages: onGenerateAuthPage,
-        ),
+        home: const HomePage(),
         theme: themeData(),
         supportedLocales: L10n.all,
         locale: Common.prefs.getString('locale') != null

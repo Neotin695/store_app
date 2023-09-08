@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../../core/services/cache/cache.dart';
@@ -17,9 +15,6 @@ class SignUpWithEmailAndPasswordFailure implements Exception {
     this.message = 'An unknown exception occurred.',
   ]);
 
-  /// Create an authentication message
-  /// from a firebase authentication exception code.
-  /// https://pub.dev/documentation/firebase_auth/latest/firebase_auth/FirebaseAuth/createUserWithEmailAndPassword.html
   factory SignUpWithEmailAndPasswordFailure.fromCode(String code) {
     switch (code) {
       case 'invalid-email':
@@ -90,16 +85,13 @@ class LogOutFailure implements Exception {}
 
 class AuthenticationRepository implements _AuthenticationRepository {
   final auth.FirebaseAuth _auth;
-  final FirebaseFirestore _firestore;
-  final FirebaseStorage _storage;
+
   final CacheClient _cacheClient;
   AuthenticationRepository({
     auth.FirebaseAuth? fAuth,
     CacheClient? cacheClient,
   })  : _auth = fAuth ?? auth.FirebaseAuth.instance,
-        _cacheClient = cacheClient ?? CacheClient(),
-        _firestore = FirebaseFirestore.instance,
-        _storage = FirebaseStorage.instance;
+        _cacheClient = cacheClient ?? CacheClient();
 
   @visibleForTesting
   bool isWeb = kIsWeb;
