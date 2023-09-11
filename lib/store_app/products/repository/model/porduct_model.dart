@@ -9,6 +9,7 @@ class Product extends Equatable {
   final String titleAr;
   final String descriptionAr;
   final String coverUrl;
+  final String storeId;
   final List<String> images;
   final bool soldOut;
   final String category;
@@ -16,6 +17,7 @@ class Product extends Equatable {
   final int quantity;
   final int discount;
   final bool active;
+
   final List<Review> reviews;
 
   const Product({
@@ -23,6 +25,7 @@ class Product extends Equatable {
     required this.titleAr,
     required this.descriptionAr,
     required this.titleEn,
+    required this.storeId,
     required this.descriptionEn,
     required this.coverUrl,
     required this.images,
@@ -40,6 +43,7 @@ class Product extends Equatable {
         titleEn: '',
         descriptionEn: '',
         titleAr: '',
+        storeId: '',
         descriptionAr: '',
         coverUrl: '',
         images: [],
@@ -58,6 +62,7 @@ class Product extends Equatable {
         titleAr,
         descriptionAr,
         titleEn,
+        storeId,
         descriptionEn,
         coverUrl,
         images,
@@ -70,65 +75,13 @@ class Product extends Equatable {
         reviews
       ];
 
-  Product copyWith({
-    String? id,
-    String? titleEn,
-    String? descriptionEn,
-    String? titleAr,
-    String? descriptionAr,
-    String? coverUrl,
-    List<String>? images,
-    bool? soldOut,
-    String? category,
-    double? price,
-    int? quantity,
-    int? discount,
-    bool? active,
-    List<Review>? reviews,
-  }) {
-    return Product(
-      id: id ?? this.id,
-      titleEn: titleEn ?? this.titleEn,
-      descriptionEn: descriptionEn ?? this.descriptionEn,
-      titleAr: titleAr ?? this.titleAr,
-      descriptionAr: descriptionAr ?? this.descriptionAr,
-      coverUrl: coverUrl ?? this.coverUrl,
-      images: images ?? this.images,
-      soldOut: soldOut ?? this.soldOut,
-      category: category ?? this.category,
-      price: price ?? this.price,
-      quantity: quantity ?? this.quantity,
-      discount: discount ?? this.discount,
-      active: active ?? this.active,
-      reviews: reviews ?? this.reviews,
-    );
-  }
-
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'titleEn': titleEn,
-      'descriptionEn': descriptionEn,
-      'titleAr': titleAr,
-      'descriptionAr': descriptionAr,
-      'coverUrl': coverUrl,
-      'images': images,
-      'soldOut': soldOut,
-      'category': category,
-      'price': price,
-      'quantity': quantity,
-      'discount': discount,
-      'active': active,
-      'reviews': reviews.map((x) => x.toMap()).toList(),
-    };
-  }
-
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
       id: map['id'] as String,
       titleEn: map['titleEn'] as String,
       descriptionEn: map['descriptionEn'] as String,
       titleAr: map['titleAr'] as String,
+      storeId: map['storeId'] as String,
       descriptionAr: map['descriptionAr'] as String,
       coverUrl: map['coverUrl'] as String,
       images: List<String>.from((map['images'] as List<String>)),

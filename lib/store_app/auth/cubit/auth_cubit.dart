@@ -5,7 +5,6 @@ import 'package:formz/formz.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:location/location.dart';
 
-import '../../../core/services/category_repository/category_repository.dart';
 import '../../../core/services/form_input/form_input.dart';
 import '../../../core/services/form_input/src/address.dart';
 import '../../../core/services/form_input/src/name.dart';
@@ -27,11 +26,9 @@ class AuthCubit extends Cubit<AuthState> {
   LocationData? locationData;
 
   Map<String, dynamic> placeDatals = {};
-  List<Category> categories = [];
   String? logoPath;
   String? coverPath;
   String selectedCategory = '';
-  Category category = Category.empty();
 
   Future<void> getCurrentLocation(BuildContext context) async {
     emit(state.copyWith(

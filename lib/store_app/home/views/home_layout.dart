@@ -38,6 +38,10 @@ class _HomeLayoutState extends State<HomeLayout> {
               tooltip: 'home',
               label: trans(context).home),
           BottomNavigationBarItem(
+              icon: const Icon(Icons.shopping_cart),
+              tooltip: 'cart',
+              label: trans(context).cart),
+          BottomNavigationBarItem(
               icon: const Icon(Icons.settings),
               tooltip: 'menu',
               label: trans(context).settings),
@@ -45,14 +49,6 @@ class _HomeLayoutState extends State<HomeLayout> {
               icon: const Icon(Icons.person),
               tooltip: 'Me',
               label: trans(context).profile),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.shopping_cart),
-              tooltip: 'menu',
-              label: trans(context).settings),
-          BottomNavigationBarItem(
-              icon: const Icon(Icons.settings),
-              tooltip: 'menu',
-              label: trans(context).settings),
         ],
         selectedItemColor: orange,
         unselectedItemColor: grey,

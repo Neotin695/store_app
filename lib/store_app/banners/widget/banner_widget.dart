@@ -20,19 +20,19 @@ class _BannerWidgetState extends State<BannerWidget> {
 
   @override
   void initState() {
-    bloc = BlocProvider.of(context);
+    bloc = BlocProvider.of<BannersBloc>(context);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 5.h),
+      padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
       child: BlocBuilder<BannersBloc, BannersState>(
         builder: (context, state) {
           if (state is BannersLoading) return loadingWidget();
           if (state is BannersFailure) {
-            return EmptyData(assetIcon: iEmpty, title: '');
+            return empty();
           }
 
           if (state is BannersLoaded) {

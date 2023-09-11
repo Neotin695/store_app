@@ -30,6 +30,8 @@ class BannersBloc extends Bloc<BannersEvent, BannersState> {
     emit(BannersLoading());
     if (event.banners.isNotEmpty) {
       emit(BannersLoaded(banners: event.banners));
+    } else {
+      emit(BannersFailure());
     }
   }
 }

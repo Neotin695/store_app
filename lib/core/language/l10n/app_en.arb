@@ -87,5 +87,10 @@
   "soldOut": "Sold Out",
   "available": "Available",
   "profile": "Me",
+  "cart": "Cart",
+  "showMore": "More",
+  "open": "Open",
+  "closed": "Closed",
+
   "signOut": "Sign out"
 }
