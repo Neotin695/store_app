@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:store_app/core/constances/media_const.dart';
 import 'package:store_app/core/shared/empty_data.dart';
+import 'package:store_app/core/theme/fonts/landk_fonts.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 
 import '../bloc/category_bloc.dart';
@@ -39,15 +40,27 @@ class _CategoryWidgetState extends State<CategoryWidget> {
 
           if (state is CategoryLoaded) {
             return SizedBox(
-              height: 10.h,
+              height: 15.h,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: state.category
                     .map(
-                      (e) => CachedNetworkImage(
-                        imageUrl: e.imageUrl,
-                        fit: BoxFit.cover,
-                        placeholder: (_, url) => loadingWidget(),
+                      (e) => Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CachedNetworkImage(
+                            width: 20.w,
+                            height: 10.h,
+                            imageUrl: e.imageUrl,
+                            fit: BoxFit.cover,
+                            placeholder: (_, url) => loadingWidget(),
+                          ),
+                          vSpace(1),
+                          Text(
+                            locale(context) ? e.nameAr : e.nameEn,
+                            style: bold,
+                          )
+                        ],
                       ),
                     )
                     .toList(),
