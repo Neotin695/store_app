@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import '../../../../models/review.dart';
 
-class ProductEntity extends Equatable {
+class Product extends Equatable {
   final String id;
   final String titleEn;
   final String descriptionEn;
@@ -18,7 +18,7 @@ class ProductEntity extends Equatable {
   final bool active;
   final List<Review> reviews;
 
-  const ProductEntity({
+  const Product({
     required this.id,
     required this.titleAr,
     required this.descriptionAr,
@@ -35,7 +35,7 @@ class ProductEntity extends Equatable {
     required this.reviews,
   });
 
-  static ProductEntity empty() => const ProductEntity(
+  static Product empty() => const Product(
         id: '',
         titleEn: '',
         descriptionEn: '',
@@ -70,7 +70,7 @@ class ProductEntity extends Equatable {
         reviews
       ];
 
-  ProductEntity copyWith({
+  Product copyWith({
     String? id,
     String? titleEn,
     String? descriptionEn,
@@ -86,7 +86,7 @@ class ProductEntity extends Equatable {
     bool? active,
     List<Review>? reviews,
   }) {
-    return ProductEntity(
+    return Product(
       id: id ?? this.id,
       titleEn: titleEn ?? this.titleEn,
       descriptionEn: descriptionEn ?? this.descriptionEn,
@@ -101,6 +101,44 @@ class ProductEntity extends Equatable {
       discount: discount ?? this.discount,
       active: active ?? this.active,
       reviews: reviews ?? this.reviews,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'titleEn': titleEn,
+      'descriptionEn': descriptionEn,
+      'titleAr': titleAr,
+      'descriptionAr': descriptionAr,
+      'coverUrl': coverUrl,
+      'images': images,
+      'soldOut': soldOut,
+      'category': category,
+      'price': price,
+      'quantity': quantity,
+      'discount': discount,
+      'active': active,
+      'reviews': reviews.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: map['id'] as String,
+      titleEn: map['titleEn'] as String,
+      descriptionEn: map['descriptionEn'] as String,
+      titleAr: map['titleAr'] as String,
+      descriptionAr: map['descriptionAr'] as String,
+      coverUrl: map['coverUrl'] as String,
+      images: List<String>.from((map['images'] as List<String>)),
+      soldOut: map['soldOut'] as bool,
+      category: map['category'] as String,
+      price: map['price'] as double,
+      quantity: map['quantity'] as int,
+      discount: map['discount'] as int,
+      active: map['active'] as bool,
+      reviews: List<Review>.from(map['reviews'].map((e) => Review.fromMap(e))),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/store_app/products/presentation/view/product_view.dart';
+import 'package:store_app/store_app/products/view/product_view.dart';
 
-import '../bloc/product_bloc.dart';
+import '../bloc/products_bloc.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({
@@ -12,7 +12,7 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProductBloc(),
+      create: (context) => ProductsBloc(),
       child: const ProductView(),
     );
   }

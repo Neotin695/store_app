@@ -3,12 +3,12 @@ import 'package:sizer/sizer.dart';
 import 'package:store_app/core/theme/colors/landk_colors.dart';
 import 'package:store_app/core/theme/fonts/landk_fonts.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
-import 'package:store_app/store_app/products/domain/entities/product_entity.dart';
+import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({super.key, required this.product});
 
-  final ProductEntity product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {

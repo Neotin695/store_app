@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/breakpoint.dart';
 import 'package:responsive_framework/responsive_breakpoints.dart';
 import 'package:sizer/sizer.dart';
-import 'package:store_app/store_app/home/widgets/home_page.dart';
+import 'package:store_app/store_app/home/views/home_layout.dart';
 
 import '../../../core/language/l10n/l10n.dart';
 import '../../../core/language/lang.dart';
@@ -56,7 +56,7 @@ class _AppViewState extends State<AppView> {
       builder: (context, orientation, deviceType) => MaterialApp(
         key: key,
         debugShowCheckedModeBanner: false,
-        home: const HomePage(),
+        home: const HomeLayout(),
         theme: themeData(),
         supportedLocales: L10n.all,
         locale: Common.prefs.getString('locale') != null
@@ -75,6 +75,7 @@ class _AppViewState extends State<AppView> {
 
   ThemeData themeData() {
     return ThemeData(
+      useMaterial3: true,
       primarySwatch: Colors.orange,
       fontFamily: 'Tajawal',
       inputDecorationTheme: InputDecorationTheme(

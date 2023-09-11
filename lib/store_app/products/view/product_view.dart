@@ -4,9 +4,9 @@ import 'package:sizer/sizer.dart';
 import 'package:store_app/core/constances/media_const.dart';
 import 'package:store_app/core/shared/empty_data.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
-import 'package:store_app/store_app/products/presentation/widget/product_item.dart';
+import 'package:store_app/store_app/products/bloc/products_bloc.dart';
+import 'package:store_app/store_app/products/widget/product_item.dart';
 
-import '../bloc/product_bloc.dart';
 
 class ProductView extends StatefulWidget {
   const ProductView({super.key});
@@ -16,10 +16,10 @@ class ProductView extends StatefulWidget {
 }
 
 class _ProductViewState extends State<ProductView> {
-  late final ProductBloc bloc;
+  late final ProductsBloc bloc;
   @override
   void initState() {
-    bloc = BlocProvider.of<ProductBloc>(context);
+    bloc = BlocProvider.of<ProductsBloc>(context);
     super.initState();
   }
 
@@ -27,7 +27,7 @@ class _ProductViewState extends State<ProductView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: BlocBuilder<ProductBloc, ProductState>(
+        child: BlocBuilder<ProductsBloc, ProductsState>(
           builder: (context, state) {
             if (state is ProductsLoaded) {
               return SizedBox(

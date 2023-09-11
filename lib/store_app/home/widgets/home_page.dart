@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/store_app/products/presentation/view/products_page.dart';
+import 'package:store_app/store_app/banners/reppository/banners_repository.dart';
+import 'package:store_app/store_app/banners/view/banner_page.dart';
 
 class HomePage extends StatelessWidget {
   static Page page() => const MaterialPage(child: HomePage());
@@ -7,6 +8,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ProductsPage();
+    return Column(
+      children: [
+        BannerPage(
+          bannerRepository: BannerRepository(),
+        ),
+      ],
+    );
   }
 }
