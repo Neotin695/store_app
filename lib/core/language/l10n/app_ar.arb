@@ -91,5 +91,8 @@
   "showMore": "اظهار المزيد",
   "open": "مفتوح",
   "closed": "مغلق",
+  "unAvailable": "غير متاح",
+  "showCart": "عرض السله",
+  
   "signOut": "تسجيل الخروج"
 }

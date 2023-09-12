@@ -84,7 +84,7 @@ class Product extends Equatable {
       storeId: map['storeId'] as String,
       descriptionAr: map['descriptionAr'] as String,
       coverUrl: map['coverUrl'] as String,
-      images: List<String>.from((map['images'] as List<String>)),
+      images: List<String>.from(map['images'].map((e) => e)),
       soldOut: map['soldOut'] as bool,
       category: map['category'] as String,
       price: map['price'] as double,

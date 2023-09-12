@@ -19,6 +19,8 @@ final class StoreLoaded extends StoreState {
 
 final class StoreFailure extends StoreState {}
 
+final class StoreSuccess extends StoreState {}
+
 final class ProductLoaded extends StoreState {
   final List<Product> products;
 

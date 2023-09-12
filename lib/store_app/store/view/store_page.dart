@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:store_app/store_app/store/bloc/store_bloc.dart';
+import 'package:store_app/store_app/store/repository/src/models/category.dart';
+import 'package:store_app/store_app/store/repository/src/models/store.dart';
 import 'package:store_app/store_app/store/repository/src/store_repository.dart';
-import 'package:store_app/store_app/store/view/sotre_view.dart';
+
+import '../bloc/store_bloc.dart';
+import 'store_view.dart';
 
 class StorePage extends StatelessWidget {
-  static Page page() => MaterialPage(
-          child: StorePage(
-        storeRepository: StoreRepository(),
-      ));
-  const StorePage({super.key, required this.storeRepository});
+  const StorePage(
+      {super.key, required this.storeRepository, required this.store, required this.category});
+
+  final Store store;
+  final StoreCategory category;
 
   final StoreRepository storeRepository;
 
@@ -18,8 +21,9 @@ class StorePage extends StatelessWidget {
     return RepositoryProvider.value(
       value: storeRepository,
       child: BlocProvider(
-        create: (context) => StoreBloc(storeRepository),
-        child: const StoreView(),
+        create: (context) => StoreBloc(storeRepository)
+          ..add(FetchAllProductsOfStore(storeId: store.id)),
+        child: StoreView(store: store,category:category),
       ),
     );
   }

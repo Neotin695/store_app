@@ -6,14 +6,13 @@ import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/store/bloc/store_bloc.dart';
 import 'package:store_app/store_app/store/widget/store_item.dart';
 
-class StoreView extends StatefulWidget {
-  const StoreView({super.key});
-
+class StoresView extends StatefulWidget {
+  const StoresView({super.key});
   @override
-  State<StoreView> createState() => _StoreViewState();
+  State<StoresView> createState() => _StoreViewState();
 }
 
-class _StoreViewState extends State<StoreView> {
+class _StoreViewState extends State<StoresView> {
   late final StoreBloc bloc;
 
   @override

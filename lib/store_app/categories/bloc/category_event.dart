@@ -8,9 +8,9 @@ sealed class CategoryEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _FetchAllBanners extends CategoryEvent {
-  final List<Category> banners;
-  const _FetchAllBanners({
-    required this.banners,
+class _FetchAllCategories extends CategoryEvent {
+  final List<Category> category;
+  const _FetchAllCategories({
+    required this.category,
   });
 }

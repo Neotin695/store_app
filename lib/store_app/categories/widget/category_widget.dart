@@ -1,13 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:store_app/core/constances/media_const.dart';
-import 'package:store_app/core/shared/empty_data.dart';
 import 'package:store_app/core/theme/fonts/landk_fonts.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 
 import '../bloc/category_bloc.dart';
+import '../view/show_all_categories_view.dart';
 
 class CategoryWidget extends StatefulWidget {
   const CategoryWidget({super.key});
@@ -39,32 +38,54 @@ class _CategoryWidgetState extends State<CategoryWidget> {
           }
 
           if (state is CategoryLoaded) {
-            return SizedBox(
-              height: 15.h,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: state.category
-                    .map(
-                      (e) => Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          CachedNetworkImage(
-                            width: 20.w,
-                            height: 10.h,
-                            imageUrl: e.imageUrl,
-                            fit: BoxFit.cover,
-                            placeholder: (_, url) => loadingWidget(),
+            return Column(
+              children: [
+                ListTile(
+                  title: Text(trans(context).categories),
+                  trailing: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              ShowAllCategoriesPage(categories: state.category),
+                        ),
+                      );
+                    },
+                    child: Text(trans(context).showMore),
+                  ),
+                ),
+                SizedBox(
+                  height: 15.h,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: state.category
+                        .map(
+                          (e) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 7),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                CachedNetworkImage(
+                                  width: 20.w,
+                                  height: 10.h,
+                                  imageUrl: e.imageUrl,
+                                  fit: BoxFit.cover,
+                                  placeholder: (_, url) => loadingWidget(),
+                                ),
+                                vSpace(1),
+                                Text(
+                                  locale(context) ? e.nameAr : e.nameEn,
+                                  style: bold,
+                                )
+                              ],
+                            ),
                           ),
-                          vSpace(1),
-                          Text(
-                            locale(context) ? e.nameAr : e.nameEn,
-                            style: bold,
-                          )
-                        ],
-                      ),
-                    )
-                    .toList(),
-              ),
+                        )
+                        .toList(),
+                  ),
+                ),
+              ],
             );
           }
           return empty();

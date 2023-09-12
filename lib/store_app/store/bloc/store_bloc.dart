@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
+import 'package:store_app/store_app/store/repository/src/models/category.dart';
 import 'package:store_app/store_app/store/repository/src/models/store.dart';
 import 'package:store_app/store_app/store/repository/src/store_repository.dart';
 
@@ -14,36 +15,42 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     on<_FetchAllStores>(_fetchAllStores);
     on<FetchAllProductsOfStore>(_fetchAlllProductsOfStore);
     on<AddReview>((AddReview event, emit) {});
-
-    _storeSubscription = _repository.fetchStore().listen((event) {
-      add(_FetchAllStores(stores: event));
-    });
+    on<PopulateStoreCategory>(_populateStoreCategory);
+    add(_FetchAllStores());
   }
 
-  FutureOr<void> _fetchAlllProductsOfStore(
-      FetchAllProductsOfStore event, Emitter<StoreState> emit) {
+  FutureOr<void> _populateStoreCategory(
+      PopulateStoreCategory event, emit) async {
     emit(StoreLoading());
-    emit.forEach(_repository.fetchProductOfStore(event.storeId),
+    await _repository.populateStoreCategory(event.categoryId).then(
+      (value) {
+        storeCategory = value;
+        emit(StoreLoaded(stores: store));
+      },
+    );
+  }
+
+  List<Store> store = [];
+
+  FutureOr<void> _fetchAlllProductsOfStore(
+      FetchAllProductsOfStore event, Emitter<StoreState> emit) async {
+    emit(StoreLoading());
+    await emit.forEach(_repository.fetchProductOfStore(event.storeId),
         onData: (data) {
       return ProductLoaded(products: data);
     });
   }
 
-  FutureOr<void> _fetchAllStores(_FetchAllStores event, emit) {
+  StoreCategory storeCategory = StoreCategory.empty();
+
+  FutureOr<void> _fetchAllStores(
+      _FetchAllStores event, Emitter<StoreState> emit) async {
     emit(StoreLoading());
-    if (event.stores.isNotEmpty) {
-      emit(StoreLoaded(stores: event.stores));
-    }
+    await emit.forEach(_repository.fetchStore(), onData: (data) {
+      store = data;
+      return StoreLoaded(stores: data);
+    });
   }
 
-  @override
-  Future close() {
-    _storeSubscription.cancel();
-    _productSubscription.cancel();
-    return super.close();
-  }
-
-  late final StreamSubscription<List<Store>> _storeSubscription;
-  late final StreamSubscription<List<Product>> _productSubscription;
   final StoreRepository _repository;
 }

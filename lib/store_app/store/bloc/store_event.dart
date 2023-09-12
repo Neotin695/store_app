@@ -9,10 +9,7 @@ sealed class StoreEvent extends Equatable {
 }
 
 class _FetchAllStores extends StoreEvent {
-  final List<Store> stores;
-  const _FetchAllStores({
-    required this.stores,
-  });
+  
 }
 
 class FetchAllProductsOfStore extends StoreEvent {
@@ -23,3 +20,10 @@ class FetchAllProductsOfStore extends StoreEvent {
 }
 
 class AddReview extends StoreEvent {}
+
+class PopulateStoreCategory extends StoreEvent {
+  final String categoryId;
+  const PopulateStoreCategory({
+    required this.categoryId,
+  });
+}

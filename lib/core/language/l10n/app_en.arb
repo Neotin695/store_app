@@ -91,6 +91,7 @@
   "showMore": "More",
   "open": "Open",
   "closed": "Closed",
-
+  "unAvailable": "Un Available",
+  "showCart": "See Cart",
   "signOut": "Sign out"
 }

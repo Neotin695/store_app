@@ -13,12 +13,11 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.all(5.0),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      elevation: 5,
+      margin: EdgeInsets.symmetric(horizontal: 3.w),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
+        child: Row(
           children: [
             Image.network(
               product.coverUrl,
@@ -26,20 +25,52 @@ class ProductItem extends StatelessWidget {
               width: 10.w,
               height: 10.h,
             ),
-            vSpace(2),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            hSpace(2),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(locale(context) ? product.titleAr : product.titleEn,
-                    style: h5),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+                    style: h4),
+                // IconButton(onPressed: () {}, icon: const Icon(Icons.favorite))
+                Text(
+                  '${product.price}',
+                  style: bold,
+                ),
               ],
             ),
-            vSpace(1),
-            Text(
-              '\$${product.price}',
-              style: h5.copyWith(color: orange),
-            ),
+            const Spacer(),
+            Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(360),
+                    color: orange,
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
+                  child: Icon(
+                    Icons.add,
+                    size: 14.sp,
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: product.active ? green : orange,
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
+                  margin: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.h),
+                  child: Text(
+                    product.active
+                        ? trans(context).available
+                        : trans(context).unAvailable,
+                    style: h5.copyWith(
+                        color: !product.active ? black : white,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

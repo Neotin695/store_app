@@ -9,10 +9,10 @@ part 'category_state.dart';
 
 class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryBloc(this._categoryRepository) : super(CategoryInitial()) {
-    on<_FetchAllBanners>(_fetchAllBanners);
+    on<_FetchAllCategories>(_fetchAllBanners);
 
     _subscription = _categoryRepository.fetchAllCategories().listen((event) {
-      add(_FetchAllBanners(banners: event));
+      add(_FetchAllCategories(category: event));
     });
   }
 
@@ -26,10 +26,10 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     return super.close();
   }
 
-  FutureOr<void> _fetchAllBanners(_FetchAllBanners event, emit) {
+  FutureOr<void> _fetchAllBanners(_FetchAllCategories event, emit) {
     emit(CategoryLoading());
-    if (event.banners.isNotEmpty) {
-      emit(CategoryLoaded(category: event.banners));
+    if (event.category.isNotEmpty) {
+      emit(CategoryLoaded(category: event.category));
     } else {
       emit(CategoryFailure());
     }
