@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:store_app/models/cart.dart';
 import 'package:store_app/models/review.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 import 'package:store_app/store_app/store/repository/src/models/category.dart';
 
+import '../../../cart/repository/cart_repository.dart';
 import 'models/store.dart';
 
 abstract class _StoreRepository {
@@ -63,18 +63,33 @@ class StoreRepository extends _StoreRepository {
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) async {
-      final cartOriginal = Cart.fromMap(value.data()!);
-      final index = cartOriginal.quantity
-          .indexWhere((element) => element == cart.quantity.first);
-      if (index == -1) {
-        cartOriginal.quantity.add(cart.quantity.first);
+      if (value.data() != null) {
+        await _whenCartIsEmpty(value, cart);
       } else {
-        cartOriginal.quantity.insert(index, cart.quantity.first);
+        await _whenCartIsNotEmpty(cart);
       }
+    });
+  }
+
+  Future<void> _whenCartIsNotEmpty(Cart cart) async {
+    await _store
+        .collection('carts')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .set(cart.copyWith(id: FirebaseAuth.instance.currentUser!.uid).toMap());
+  }
+
+  Future<void> _whenCartIsEmpty(
+      DocumentSnapshot<Map<String, dynamic>> value, Cart cart) async {
+    final cartOriginal = Cart.fromMap(value.data()!);
+    final index = cartOriginal.quantities.indexWhere(
+        (element) => element.productId == cart.quantities.first.productId);
+
+    if (index == -1) {
+      cartOriginal.quantities.add(cart.quantities.first);
       await _store
           .collection('carts')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .set(cartOriginal.toMap());
-    });
+          .update(cartOriginal.toMap());
+    }
   }
 }

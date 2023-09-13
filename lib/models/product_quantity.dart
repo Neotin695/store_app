@@ -3,14 +3,13 @@ import 'package:equatable/equatable.dart';
 
 class ProductQuantity extends Equatable {
   final String productId;
-  final int quantity;
-  const ProductQuantity({
+  int quantity;
+  ProductQuantity({
     required this.productId,
     required this.quantity,
   });
 
-  static ProductQuantity empty() =>
-      const ProductQuantity(productId: '', quantity: 0);
+  static ProductQuantity empty() => ProductQuantity(productId: '', quantity: 0);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -36,5 +35,15 @@ class ProductQuantity extends Equatable {
   String toString() {
     // TODO: implement toString
     return 'quantity \n $quantity';
+  }
+
+  ProductQuantity copyWith({
+    String? productId,
+    int? quantity,
+  }) {
+    return ProductQuantity(
+      productId: productId ?? this.productId,
+      quantity: quantity ?? this.quantity,
+    );
   }
 }

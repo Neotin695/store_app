@@ -1,7 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sizer/sizer.dart';
 import 'package:store_app/core/theme/colors/landk_colors.dart';
 import 'package:store_app/core/theme/fonts/landk_fonts.dart';
@@ -47,17 +45,9 @@ class ProductItem extends StatelessWidget {
               children: [
                 InkWell(
                   onTap: () {
-                    if (FirebaseAuth.instance.currentUser == null) {
-                      Fluttertoast.showToast(
-                        msg: trans(context).plsLogin,
-                        backgroundColor: orange,
-                        textColor: black,
-                      );
-                    } else {
-                      context
-                          .read<StoreBloc>()
-                          .add(AddToCart(productId: product.id));
-                    }
+                    context
+                        .read<StoreBloc>()
+                        .add(AddToCart(productId: product.id));
                   },
                   child: Container(
                     decoration: BoxDecoration(

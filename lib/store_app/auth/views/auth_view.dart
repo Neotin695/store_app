@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
 import 'package:sizer/sizer.dart';
+import 'package:store_app/store_app/auth/repository/authentication_repository.dart';
+import 'package:store_app/store_app/auth/views/auth_signup_page.dart';
 import '../../../core/constances/media_const.dart';
 import '../../../core/shared/offline_widget.dart';
 import '../../../core/theme/colors/landk_colors.dart';
@@ -114,11 +116,20 @@ class _CreateAccount extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              trans(context).newVendors,
+              trans(context).createAccount,
               style: bold,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AuthSignUpPage(
+                      authenticationRepository: AuthenticationRepository(),
+                    ),
+                  ),
+                );
+              },
               style: TextButton.styleFrom(
                 foregroundColor: orange,
               ),

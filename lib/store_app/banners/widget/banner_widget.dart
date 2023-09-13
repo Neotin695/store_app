@@ -3,8 +3,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
-import 'package:store_app/core/constances/media_const.dart';
-import 'package:store_app/core/shared/empty_data.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/banners/bloc/banners_bloc.dart';
 

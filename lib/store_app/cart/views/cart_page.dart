@@ -15,7 +15,7 @@ class CartPage extends StatelessWidget {
     return RepositoryProvider.value(
       value: cartRepository,
       child: BlocProvider(
-        create: (context) => CartBloc(),
+        create: (context) => CartBloc(cartRepository),
         child: const CartView(),
       ),
     );

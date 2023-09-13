@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:store_app/models/cart.dart';
 import 'package:store_app/models/product_quantity.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 import 'package:store_app/store_app/store/repository/src/models/category.dart';
 import 'package:store_app/store_app/store/repository/src/models/store.dart';
 import 'package:store_app/store_app/store/repository/src/store_repository.dart';
+
+import '../../cart/repository/cart_repository.dart';
 
 part 'store_event.dart';
 part 'store_state.dart';
@@ -23,9 +24,9 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
   }
   List<ProductQuantity> items = [];
   FutureOr<void> _addToCart(AddToCart event, emit) async {
-    emit(StoreLoading());
-    items.add(ProductQuantity(productId: event.productId, quantity: 1));
-    await _repository.addToCart(Cart(id: '', quantity: items));
+    await _repository.addToCart(Cart(id: '', quantities: [
+      ProductQuantity(productId: event.productId, quantity: 1)
+    ]));
   }
 
   FutureOr<void> _populateStoreCategory(

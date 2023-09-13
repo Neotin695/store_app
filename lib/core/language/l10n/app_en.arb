@@ -1,8 +1,8 @@
 {
   "language": "Language",
   "helloWorld": "Hello World!",
-  "welcome": "Welcome to Landak Vendor",
-  "welcomeMessage": "Log in and be able to sell your products easily and become a partner in your business",
+  "welcome": "Welcome to Landak Store",
+  "welcomeMessage": "Log in to buy items from favorite stores with big sell",
   "landk": "Landk",
   "email": "Email",
   "password": "Password",
@@ -95,5 +95,7 @@
   "showCart": "See Cart",
   "noProducts": "There are no products in this store yet",
   "plsLogin": "Please login first",
+  "explorerProducts": "Explorer Products",
+  "checkout": "Checkout",
   "signOut": "Sign out"
 }
