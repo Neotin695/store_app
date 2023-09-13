@@ -9,7 +9,10 @@ import 'store_view.dart';
 
 class StorePage extends StatelessWidget {
   const StorePage(
-      {super.key, required this.storeRepository, required this.store, required this.category});
+      {super.key,
+      required this.storeRepository,
+      required this.store,
+      required this.category});
 
   final Store store;
   final StoreCategory category;
@@ -23,7 +26,7 @@ class StorePage extends StatelessWidget {
       child: BlocProvider(
         create: (context) => StoreBloc(storeRepository)
           ..add(FetchAllProductsOfStore(storeId: store.id)),
-        child: StoreView(store: store,category:category),
+        child: StoreView(store: store, category: category),
       ),
     );
   }

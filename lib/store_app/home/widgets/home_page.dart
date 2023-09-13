@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/banners/reppository/banners_repository.dart';
 import 'package:store_app/store_app/banners/view/banner_page.dart';
 import 'package:store_app/store_app/categories/reppository/category_repository.dart';
@@ -14,31 +13,27 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        BannerPage(
-          bannerRepository: BannerRepository(),
-        ),
-        CategoryPage(
-          categoryRepository: CategoryRepository(),
-        ),
-        ListTile(
-          title: Text(trans(context).store),
-          trailing: TextButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => StoresPage(
-                    storeRepository: StoreRepository(),
-                  ),
-                ),
-              );
-            },
-            child: Text(trans(context).showMore),
+    return CustomScrollView(
+      slivers: [
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              BannerPage(
+                bannerRepository: BannerRepository(),
+              ),
+              CategoryPage(
+                categoryRepository: CategoryRepository(),
+              ),
+            ],
           ),
         ),
-        StoresPage(storeRepository: StoreRepository())
+        SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              StoresPage(storeRepository: StoreRepository()),
+            ],
+          ),
+        ),
       ],
     );
   }

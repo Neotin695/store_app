@@ -93,5 +93,7 @@
   "closed": "Closed",
   "unAvailable": "Un Available",
   "showCart": "See Cart",
+  "noProducts": "There are no products in this store yet",
+  "plsLogin": "Please login first",
   "signOut": "Sign out"
 }

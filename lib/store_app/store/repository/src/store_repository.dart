@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:store_app/models/cart.dart';
 import 'package:store_app/models/review.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 import 'package:store_app/store_app/store/repository/src/models/category.dart';
@@ -7,6 +9,8 @@ import 'models/store.dart';
 
 abstract class _StoreRepository {
   Stream<List<Store>> fetchStore();
+
+  Future<void> addToCart(Cart cart);
 
   Future<void> addReview(List<Review> review, String storeId);
 
@@ -50,5 +54,27 @@ class StoreRepository extends _StoreRepository {
   Future<StoreCategory> populateStoreCategory(String categoryId) async {
     return StoreCategory.fromMap(
         (await _store.collection('category').doc(categoryId).get()).data()!);
+  }
+
+  @override
+  Future<void> addToCart(Cart cart) async {
+    await _store
+        .collection('carts')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .get()
+        .then((value) async {
+      final cartOriginal = Cart.fromMap(value.data()!);
+      final index = cartOriginal.quantity
+          .indexWhere((element) => element == cart.quantity.first);
+      if (index == -1) {
+        cartOriginal.quantity.add(cart.quantity.first);
+      } else {
+        cartOriginal.quantity.insert(index, cart.quantity.first);
+      }
+      await _store
+          .collection('carts')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set(cartOriginal.toMap());
+    });
   }
 }

@@ -20,6 +20,8 @@ class _CartViewState extends State<CartView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column();
+    return Scaffold(
+      appBar: AppBar(),
+    );
   }
 }

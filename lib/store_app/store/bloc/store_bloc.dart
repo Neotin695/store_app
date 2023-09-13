@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:store_app/models/cart.dart';
+import 'package:store_app/models/product_quantity.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 import 'package:store_app/store_app/store/repository/src/models/category.dart';
 import 'package:store_app/store_app/store/repository/src/models/store.dart';
@@ -15,8 +17,15 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     on<_FetchAllStores>(_fetchAllStores);
     on<FetchAllProductsOfStore>(_fetchAlllProductsOfStore);
     on<AddReview>((AddReview event, emit) {});
+    on<AddToCart>(_addToCart);
     on<PopulateStoreCategory>(_populateStoreCategory);
     add(_FetchAllStores());
+  }
+  List<ProductQuantity> items = [];
+  FutureOr<void> _addToCart(AddToCart event, emit) async {
+    emit(StoreLoading());
+    items.add(ProductQuantity(productId: event.productId, quantity: 1));
+    await _repository.addToCart(Cart(id: '', quantity: items));
   }
 
   FutureOr<void> _populateStoreCategory(
@@ -38,6 +47,8 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     await emit.forEach(_repository.fetchProductOfStore(event.storeId),
         onData: (data) {
       return ProductLoaded(products: data);
+    }, onError: (_, __) {
+      return StoreFailure();
     });
   }
 

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:store_app/core/services/common.dart';
 import 'package:store_app/core/theme/fonts/landk_fonts.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 
@@ -45,7 +46,7 @@ class _CategoryWidgetState extends State<CategoryWidget> {
                   trailing: TextButton(
                     onPressed: () {
                       Navigator.push(
-                        context,
+                        Common.scaffoldState.currentContext!,
                         MaterialPageRoute(
                           builder: (_) =>
                               ShowAllCategoriesPage(categories: state.category),

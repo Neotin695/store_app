@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:store_app/core/services/common.dart';
 import 'package:store_app/core/theme/colors/landk_colors.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/store/bloc/store_bloc.dart';
@@ -38,7 +39,7 @@ class _StoreItemState extends State<StoreItem> {
     return InkWell(
       onTap: () {
         Navigator.push(
-          context,
+          Common.scaffoldState.currentContext!,
           MaterialPageRoute(
             builder: (_) => StorePage(
               store: widget.store,

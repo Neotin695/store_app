@@ -18,14 +18,14 @@ class EmptyData extends StatelessWidget {
         children: <Widget>[
           SvgPicture.asset(
             assetIcon,
-            width: 30.w,
-            height: 30.h,
+            width: 25.w,
+            height: 25.h,
           ),
           vSpace(3),
           Text(
             title,
             style: TextStyle(
-              fontSize: 17.sp,
+              fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),
           ),

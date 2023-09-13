@@ -23,6 +23,13 @@ class _ShowAllCategoriesViewState extends State<ShowAllCategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          trans(context).categories,
+          style: bold,
+        ),
+      ),
       body: GridView.count(
         crossAxisCount: 3,
         children: widget.categories

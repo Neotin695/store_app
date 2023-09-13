@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:store_app/store_app/cart/repository/cart_repository.dart';
+import 'package:store_app/store_app/cart/views/cart_view.dart';
 
 import '../bloc/cart_bloc.dart';
 
@@ -15,7 +16,7 @@ class CartPage extends StatelessWidget {
       value: cartRepository,
       child: BlocProvider(
         create: (context) => CartBloc(),
-        child: Container(),
+        child: const CartView(),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
+import 'package:store_app/core/services/common.dart';
 import '../../../core/theme/colors/landk_colors.dart';
 import '../../../core/tools/tools_widget.dart';
 import '../routes/routes.dart';
@@ -24,6 +25,7 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Common.scaffoldState,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {},
