@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:formz/formz.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:sizer/sizer.dart';
 import 'package:store_app/core/theme/colors/landk_colors.dart';
 import 'package:store_app/core/theme/fonts/landk_fonts.dart';
@@ -65,6 +66,16 @@ class _AuthSignUpViewState extends State<AuthSignUpView> {
                     const _Password(),
                     vSpace(2),
                     const _PasswordConfirm(),
+                    vSpace(2),
+                    InternationalPhoneNumberInput(
+                      onInputChanged: (PhoneNumber value) {
+                        context
+                            .read<AuthCubit>()
+                            .phoneChanged(value.phoneNumber!);
+                      },
+                      selectorConfig: const SelectorConfig(
+                          selectorType: PhoneInputSelectorType.BOTTOM_SHEET),
+                    ),
                     vSpace(2),
                     const _SignInBtn(),
                   ],

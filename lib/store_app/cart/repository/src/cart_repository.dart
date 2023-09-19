@@ -7,7 +7,7 @@ import '../cart_repository.dart';
 abstract class _CartRepository {
   Stream<Cart> fetchAllCartItems();
 
-  Future<void> checkout(Cart cart);
+
 
   Future<void> removeFromCart(String productId);
 
@@ -17,11 +17,6 @@ abstract class _CartRepository {
 class CartRepository extends _CartRepository {
   final FirebaseFirestore _store;
   CartRepository() : _store = FirebaseFirestore.instance;
-  @override
-  Future<void> checkout(Cart cart) {
-    // TODO: implement checkout
-    throw UnimplementedError();
-  }
 
   @override
   Future<void> handleQuantity(ProductQuantity productQuantity) async {

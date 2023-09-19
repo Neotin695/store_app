@@ -43,6 +43,18 @@ class AuthCubit extends Cubit<AuthState> {
     );
   }
 
+  void phoneChanged(String value) {
+    final phone = Phone.dirty(value);
+    emit(state.copyWith(
+        phone: phone,
+        isValid: Formz.validate([
+          state.email,
+          state.password,
+          state.confirmedPassword,
+          phone,
+        ])));
+  }
+
   void confirmedPasswordChanged(String value) {
     final conPassword =
         ConfirmedPassword.dirty(password: state.password.value, value: value);
@@ -53,6 +65,7 @@ class AuthCubit extends Cubit<AuthState> {
         isValid: Formz.validate([
           state.email,
           state.password,
+          state.phone,
           conPassword,
         ]),
       ),
@@ -87,7 +100,6 @@ class AuthCubit extends Cubit<AuthState> {
       await _authenticationRepository.signUpWithEmailAndPassowrd(
         email: state.email.value,
         password: state.password.value,
-        confirmPassword: state.confirmedPassword.value,
       );
       emit(state.copyWith(status: FormzSubmissionStatus.success));
     } on SignUpWithEmailAndPasswordFailure catch (e) {

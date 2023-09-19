@@ -133,10 +133,10 @@ class AuthenticationRepository implements _AuthenticationRepository {
     }
   }
 
-  Future<void> signUpWithEmailAndPassowrd(
-      {required String email,
-      required String password,
-      required String confirmPassword}) async {
+  Future<void> signUpWithEmailAndPassowrd({
+    required String email,
+    required String password,
+  }) async {
     await _auth.createUserWithEmailAndPassword(
         email: email, password: password);
   }

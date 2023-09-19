@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flow_builder/flow_builder.dart';
 import 'package:flutter/material.dart';
 import 'package:store_app/core/services/common.dart';
@@ -31,6 +32,13 @@ class _HomeLayoutState extends State<HomeLayout> {
           onPressed: () {},
           icon: const Icon(Icons.notifications_outlined),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: _FlowPage(controller: controller),
       bottomNavigationBar: BottomNavigationBar(
