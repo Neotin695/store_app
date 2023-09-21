@@ -7,4 +7,6 @@ class Common {
 
   static final GlobalKey<ScaffoldState> scaffoldState = GlobalKey();
   static final GlobalKey<ScaffoldState> storesScaffold = GlobalKey();
+
+  static int totalPrice = 0;
 }

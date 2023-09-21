@@ -8,8 +8,10 @@ import 'package:store_app/core/shared/counter.dart';
 import 'package:store_app/core/shared/empty_data.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/cart/bloc/cart_bloc.dart';
+import 'package:store_app/store_app/checkout/views/shipping_info_page.dart';
 import 'package:store_app/store_app/products/repository/model/porduct_model.dart';
 
+import '../../../core/services/common.dart';
 import '../../../core/theme/colors/landk_colors.dart';
 import '../../../core/theme/fonts/landk_fonts.dart';
 
@@ -29,10 +31,12 @@ class _CartViewState extends State<CartView> {
     super.initState();
   }
 
+  List<Product> productsPrice = [];
+  Product product = Product.empty();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: Common.storesScaffold.currentState == null ? null : AppBar(),
       body: Column(
         children: [
           BlocBuilder<CartBloc, CartState>(
@@ -65,7 +69,19 @@ class _CartViewState extends State<CartView> {
                         shrinkWrap: true,
                         itemCount: products.length,
                         itemBuilder: (context, index) {
-                          final product = products[index];
+                          product = products[index];
+                          product = product.copyWith(
+                              price: product.price *
+                                  state.cart.quantities[index].quantity);
+                          if (productsPrice.isNotEmpty) {
+                            if (productsPrice.contains(product)) {
+                              final index = products
+                                  .indexWhere((element) => element == product);
+                              productsPrice.insert(index, product);
+                            }
+                          } else {
+                            productsPrice.add(product);
+                          }
                           return Row(
                             children: [
                               Padding(
@@ -77,10 +93,20 @@ class _CartViewState extends State<CartView> {
                                 ),
                               ),
                               hSpace(2),
-                              Text(
-                                locale(context)
-                                    ? product.titleAr
-                                    : product.titleEn,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    locale(context)
+                                        ? product.titleAr
+                                        : product.titleEn,
+                                    style: h4,
+                                  ),
+                                  Text(
+                                    '\$${product.price.round()}',
+                                    style: h4.copyWith(color: green),
+                                  ),
+                                ],
                               ),
                               const Spacer(),
                               Column(
@@ -140,7 +166,14 @@ class _CartViewState extends State<CartView> {
           ),
           const Spacer(),
           ElevatedButton.icon(
-            onPressed: () {},
+            onPressed: () {
+              for (var pro in productsPrice) {
+                Common.totalPrice += int.parse(pro.price.round().toString());
+              }
+
+              Navigator.push(Common.scaffoldState.currentContext!,
+                  MaterialPageRoute(builder: (_) => const ShippingInfoPage()));
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: orange,
               shape: const RoundedRectangleBorder(),

@@ -97,5 +97,10 @@
   "plsLogin": "Please login first",
   "explorerProducts": "Explorer Products",
   "checkout": "Checkout",
+  "city": "City",
+  "shippingInfo": "Shipping Info",
+  "pay": "Pay Now",
+  "addressLine": "Address Line",
+  "build": "Build Number",
   "signOut": "Sign out"
 }

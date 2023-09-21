@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 import '../../../../models/review.dart';
@@ -92,6 +93,42 @@ class Product extends Equatable {
       discount: map['discount'] as int,
       active: map['active'] as bool,
       reviews: List<Review>.from(map['reviews'].map((e) => Review.fromMap(e))),
+    );
+  }
+
+  Product copyWith({
+    String? id,
+    String? titleEn,
+    String? descriptionEn,
+    String? titleAr,
+    String? descriptionAr,
+    String? coverUrl,
+    String? storeId,
+    List<String>? images,
+    bool? soldOut,
+    String? category,
+    double? price,
+    int? quantity,
+    int? discount,
+    bool? active,
+    List<Review>? reviews,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      titleEn: titleEn ?? this.titleEn,
+      descriptionEn: descriptionEn ?? this.descriptionEn,
+      titleAr: titleAr ?? this.titleAr,
+      descriptionAr: descriptionAr ?? this.descriptionAr,
+      coverUrl: coverUrl ?? this.coverUrl,
+      storeId: storeId ?? this.storeId,
+      images: images ?? this.images,
+      soldOut: soldOut ?? this.soldOut,
+      category: category ?? this.category,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      discount: discount ?? this.discount,
+      active: active ?? this.active,
+      reviews: reviews ?? this.reviews,
     );
   }
 }

@@ -67,15 +67,7 @@ class _AuthSignUpViewState extends State<AuthSignUpView> {
                     vSpace(2),
                     const _PasswordConfirm(),
                     vSpace(2),
-                    InternationalPhoneNumberInput(
-                      onInputChanged: (PhoneNumber value) {
-                        context
-                            .read<AuthCubit>()
-                            .phoneChanged(value.phoneNumber!);
-                      },
-                      selectorConfig: const SelectorConfig(
-                          selectorType: PhoneInputSelectorType.BOTTOM_SHEET),
-                    ),
+                    const _PhoneNum(),
                     vSpace(2),
                     const _SignInBtn(),
                   ],
@@ -84,6 +76,28 @@ class _AuthSignUpViewState extends State<AuthSignUpView> {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _PhoneNum extends StatelessWidget {
+  const _PhoneNum();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 5.w),
+      child: InternationalPhoneNumberInput(
+        formatInput: true,
+        inputBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        onInputChanged: (PhoneNumber value) {
+          context.read<AuthCubit>().phoneChanged(value.phoneNumber!);
+        },
+        selectorConfig: const SelectorConfig(
+            selectorType: PhoneInputSelectorType.BOTTOM_SHEET),
       ),
     );
   }

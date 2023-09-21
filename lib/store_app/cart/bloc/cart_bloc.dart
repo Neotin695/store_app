@@ -13,28 +13,24 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     on<_FetchAllCart>(_fetchAllCarts);
     on<IncreaseQuantity>(_increaseQuantity);
     on<DecreaseQuantity>(_decrease);
-    on<RemoveFromCart>(
-      _removeFromCart
-    );
+    on<RemoveFromCart>(_removeFromCart);
     add(_FetchAllCart());
   }
 
   FutureOr<void> _removeFromCart(RemoveFromCart event, emit) async {
-     emit(CartLoading());
+    emit(CartLoading());
     await _cartRepository
         .removeFromCart(event.count.productId)
         .then((value) => add(_FetchAllCart()));
   }
 
   FutureOr<void> _decrease(DecreaseQuantity event, emit) async {
-    emit(CartLoading());
     await _cartRepository
         .handleQuantity(event.count)
         .then((value) => add(_FetchAllCart()));
   }
-
+  
   FutureOr<void> _increaseQuantity(IncreaseQuantity event, emit) async {
-    emit(CartLoading());
     await _cartRepository
         .handleQuantity(event.count)
         .then((value) => add(_FetchAllCart()));

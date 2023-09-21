@@ -622,13 +622,13 @@ packages:
     source: hosted
     version: "0.15.4"
   http:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: http
-      sha256: "759d1a329847dd0f39226c688d3e06a6b8679668e350e2891a6474f8b4bb8525"
+      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
       url: "https://pub.dev"
     source: hosted
-    version: "1.1.0"
+    version: "0.13.6"
   http_parser:
     dependency: transitive
     description:
@@ -837,6 +837,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.4"
+  moyasar:
+    dependency: "direct main"
+    description:
+      name: moyasar
+      sha256: "1890853dc75cfd2d35f88f5d283ff2a1be361758d635b05028127591560fd753"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.2"
+  moyasar_payment:
+    dependency: "direct main"
+    description:
+      name: moyasar_payment
+      sha256: "95aadd8b7b23b48418ba0ff803f93c7ec637511d3456f7d215bfce9bde711051"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.5"
   nested:
     dependency: transitive
     description:
@@ -941,6 +957,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.1"
+  pay:
+    dependency: transitive
+    description:
+      name: pay
+      sha256: d7525538a66af1982a0932d3969416e835a6aeafda59e280ed2d1f410b4aaa09
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.2"
+  pay_android:
+    dependency: transitive
+    description:
+      name: pay_android
+      sha256: "1018a21650109a829bfc35794aa548a087dde5170b14bcb5c603f8b723f985d2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.11"
+  pay_ios:
+    dependency: transitive
+    description:
+      name: pay_ios
+      sha256: eb83e70282de8aed3ceca31ed045ee1d80bf4b50d331411a9d62ad0428a91808
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.9"
+  pay_platform_interface:
+    dependency: transitive
+    description:
+      name: pay_platform_interface
+      sha256: "12580f960066855d4821c4eaf2ef77093c0b20bce623db33104f76db16642e3b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   permission_handler:
     dependency: "direct main"
     description:
@@ -1266,6 +1314,38 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.4-beta"
+  webview_flutter:
+    dependency: transitive
+    description:
+      name: webview_flutter
+      sha256: "82f6787d5df55907aa01e49bd9644f4ed1cc82af7a8257dd9947815959d2e755"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.2.4"
+  webview_flutter_android:
+    dependency: transitive
+    description:
+      name: webview_flutter_android
+      sha256: ddc167c6676f57c8b367d19fcbee267d6dc6adf81bd6c3cb87981d30746e0a6d
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.10.1"
+  webview_flutter_platform_interface:
+    dependency: transitive
+    description:
+      name: webview_flutter_platform_interface
+      sha256: "6d9213c65f1060116757a7c473247c60f3f7f332cac33dc417c9e362a9a13e4f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.6.0"
+  webview_flutter_wkwebview:
+    dependency: transitive
+    description:
+      name: webview_flutter_wkwebview
+      sha256: "485af05f2c5f83c7f78c20e236b170ad02df7153b299ae9917345be43871d29f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.8.0"
   win32:
     dependency: transitive
     description:
@@ -1290,6 +1370,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.3.0"
+  yaml:
+    dependency: transitive
+    description:
+      name: yaml
+      sha256: "75769501ea3489fca56601ff33454fe45507ea3bfb014161abc3b43ae25989d5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.2"
 sdks:
   dart: ">=3.1.0 <4.0.0"
   flutter: ">=3.13.0"
