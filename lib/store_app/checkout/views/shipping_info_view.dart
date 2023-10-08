@@ -5,7 +5,6 @@ import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/checkout/bloc/checkout_bloc.dart';
 import 'package:store_app/store_app/checkout/views/pay_page.dart';
 
-import '../../../core/services/common.dart';
 import '../../../core/shared/txt_field.dart';
 import '../../../core/theme/colors/landk_colors.dart';
 import '../../../core/theme/fonts/landk_fonts.dart';
@@ -51,6 +50,7 @@ class _ShippingInfoViewState extends State<ShippingInfoView> {
                 cn: bloc.build,
                 label: trans(context).build,
               ),
+              
               vSpace(5),
               ElevatedButton.icon(
                 onPressed: () {

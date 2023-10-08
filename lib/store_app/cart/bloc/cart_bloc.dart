@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:store_app/core/services/common.dart';
 import 'package:store_app/models/product_quantity.dart';
 
 import '../repository/cart_repository.dart';
@@ -29,7 +30,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
         .handleQuantity(event.count)
         .then((value) => add(_FetchAllCart()));
   }
-  
+
   FutureOr<void> _increaseQuantity(IncreaseQuantity event, emit) async {
     await _cartRepository
         .handleQuantity(event.count)
@@ -40,6 +41,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   FutureOr<void> _fetchAllCarts(event, Emitter<CartState> emit) async {
     emit(CartLoading());
     await emit.forEach(_cartRepository.fetchAllCartItems(), onData: (data) {
+      Common.cart = data;
       return CartLoaded(cart: data);
     }, onError: (__, _) {
       return CartFailure();

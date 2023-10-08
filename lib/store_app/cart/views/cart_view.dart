@@ -31,7 +31,6 @@ class _CartViewState extends State<CartView> {
     super.initState();
   }
 
-  List<Product> productsPrice = [];
   Product product = Product.empty();
   @override
   Widget build(BuildContext context) {
@@ -73,15 +72,7 @@ class _CartViewState extends State<CartView> {
                           product = product.copyWith(
                               price: product.price *
                                   state.cart.quantities[index].quantity);
-                          if (productsPrice.isNotEmpty) {
-                            if (productsPrice.contains(product)) {
-                              final index = products
-                                  .indexWhere((element) => element == product);
-                              productsPrice.insert(index, product);
-                            }
-                          } else {
-                            productsPrice.add(product);
-                          }
+
                           return Row(
                             children: [
                               Padding(
@@ -167,10 +158,6 @@ class _CartViewState extends State<CartView> {
           const Spacer(),
           ElevatedButton.icon(
             onPressed: () {
-              for (var pro in productsPrice) {
-                Common.totalPrice += int.parse(pro.price.round().toString());
-              }
-
               Navigator.push(Common.scaffoldState.currentContext!,
                   MaterialPageRoute(builder: (_) => const ShippingInfoPage()));
             },
