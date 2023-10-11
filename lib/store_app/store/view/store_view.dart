@@ -153,6 +153,7 @@ class _StoreViewState extends State<StoreView> {
               ],
             ),
           ),
+          vSpace(7),
           ElevatedButton.icon(
             onPressed: () {
               Navigator.push(
