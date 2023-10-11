@@ -72,7 +72,7 @@ class _CartViewState extends State<CartView> {
                           product = product.copyWith(
                               price: product.price *
                                   state.cart.quantities[index].quantity);
-
+                          Common.totalCart += product.price;
                           return Row(
                             children: [
                               Padding(

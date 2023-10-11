@@ -11,4 +11,5 @@ class Common {
   static final GlobalKey<ScaffoldState> storesScaffold = GlobalKey();
 
   static Cart cart = Cart.empty();
+  static double totalCart = 0;
 }

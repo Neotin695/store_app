@@ -55,7 +55,7 @@ class _StoreViewState extends State<StoresView> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 3,
+                itemCount: state.stores.length,
                 itemBuilder: (context, index) {
                   final store = state.stores[index];
                   return StoreItem(store: store);

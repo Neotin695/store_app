@@ -845,14 +845,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.2"
-  moyasar_payment:
-    dependency: "direct main"
-    description:
-      name: moyasar_payment
-      sha256: "95aadd8b7b23b48418ba0ff803f93c7ec637511d3456f7d215bfce9bde711051"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.5"
   nested:
     dependency: transitive
     description:

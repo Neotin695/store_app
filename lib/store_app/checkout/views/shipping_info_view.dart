@@ -46,29 +46,28 @@ class _ShippingInfoViewState extends State<ShippingInfoView> {
                 cn: bloc.addressLine,
                 label: trans(context).addressLine,
               ),
-              TxtField(
-                cn: bloc.build,
-                label: trans(context).build,
-              ),
-              
               vSpace(5),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => const PayPage()));
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: orange,
-                  shape: const RoundedRectangleBorder(),
-                  minimumSize: Size(100.w, 7.h),
-                ),
-                label: Text(
-                  trans(context).pay,
-                  style: h4.copyWith(color: black),
-                ),
-                icon: Icon(
-                  Icons.payment,
-                  color: black,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => const PayPage()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    minimumSize: Size(100.w, 7.h),
+                  ),
+                  label: Text(
+                    trans(context).pay,
+                    style: h4.copyWith(color: black),
+                  ),
+                  icon: Icon(
+                    Icons.payment,
+                    color: black,
+                  ),
                 ),
               ),
             ],

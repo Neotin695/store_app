@@ -43,7 +43,7 @@ class _PayViewState extends State<PayView> {
           child: CreditCard(
             config: PaymentConfig(
               publishableApiKey: LogicConst.moyasarKey,
-              amount: int.parse('${Common.cart}0'), // SAR 257.58
+              amount: int.parse('${Common.totalCart.floor()}0'), // SAR 257.58
               description: 'order #1324',
               metadata: {'size': '250g'},
             ),
