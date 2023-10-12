@@ -10,7 +10,9 @@ sealed class CheckoutEvent extends Equatable {
 
 class PlaceOrder extends CheckoutEvent {
   final Cart cart;
+  final String cachType;
   const PlaceOrder({
     required this.cart,
+    required this.cachType,
   });
 }

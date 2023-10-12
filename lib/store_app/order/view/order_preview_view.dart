@@ -37,6 +37,7 @@ class _OrderPreviewViewState extends State<OrderPreviewView> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: customKey,
+      appBar: AppBar(),
       body: BlocBuilder<OrderBloc, OrderState>(
         builder: (context, state) {
           return SingleChildScrollView(

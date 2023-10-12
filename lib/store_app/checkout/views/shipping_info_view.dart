@@ -1,3 +1,4 @@
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
@@ -74,24 +75,41 @@ class _ShippingInfoViewState extends State<ShippingInfoView> {
               vSpace(2),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5.w),
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    bloc.add(PlaceOrder(cart: Common.cart));
+                child: BlocConsumer<CheckoutBloc, CheckoutState>(
+                  listener: (context, state) {
+                    if (state is CheckoutSuccess) {
+                      CoolAlert.show(
+                          context: context,
+                          type: CoolAlertType.success,
+                          onConfirmBtnTap: () {
+                            Navigator.pop(context);
+                          });
+                    }
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: orange,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    minimumSize: Size(100.w, 7.h),
-                  ),
-                  label: Text(
-                    trans(context).cach,
-                    style: h4.copyWith(color: black),
-                  ),
-                  icon: Icon(
-                    Icons.money,
-                    color: black,
-                  ),
+                  builder: (context, state) {
+                    return ElevatedButton.icon(
+                      onPressed: () {
+                        bloc.add(
+                            PlaceOrder(cart: Common.cart, cachType: 'cach'));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: orange,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        minimumSize: Size(100.w, 7.h),
+                      ),
+                      label: state is CheckoutLoading
+                          ? loadingWidget()
+                          : Text(
+                              trans(context).cach,
+                              style: h4.copyWith(color: black),
+                            ),
+                      icon: Icon(
+                        Icons.money,
+                        color: black,
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

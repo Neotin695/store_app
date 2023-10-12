@@ -51,7 +51,7 @@ class _PayViewState extends State<PayView> {
               if (result is PaymentResponse) {
                 switch (result.status) {
                   case PaymentStatus.paid:
-                    bloc.add(PlaceOrder(cart: Common.cart));
+                    bloc.add(PlaceOrder(cart: Common.cart, cachType: 'visa'));
                     break;
                   case PaymentStatus.failed:
                     // handle failure.

@@ -20,9 +20,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     on<FetchOneOrder>(_fetchOneOrder);
     on<FetchProduct>(_fetchProduct);
 
-    _subscription = _orderRepository.fetchAllOrder().listen((event) {
-      add(_FetchAllOrders(orders: event));
-    });
+    add(_FetchAllOrders());
   }
 
   final OrderRepository _orderRepository;
@@ -34,21 +32,20 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
   List<Product> products = [];
   Delegate delegate = Delegate.empty();
 
-  @override
-  Future<void> close() {
-    _subscription.cancel();
-    return super.close();
-  }
-
-  FutureOr<void> _fetchAllOrder(_FetchAllOrders event, emit) {
+  FutureOr<void> _fetchAllOrder(
+      _FetchAllOrders event, Emitter<OrderState> emit) async {
     emit(OrderLoadingState());
-    orders = event.orders;
-    if (orders.isNotEmpty) {
-      emit(OrderSuccessState());
-    }
+    await emit.forEach(_orderRepository.fetchAllOrder(), onData: (data) {
+      orders = data;
+      return OrderSuccessState();
+    }, onError: (
+      _,
+      __,
+    ) {
+      return OrderFailureState();
+    });
   }
 
- 
   FutureOr<void> _fetchDelegate(FetchDelegate event, emit) async {
     emit(OrderLoadingState());
     delegate = await _orderRepository.fetchDelegate(event.id);
@@ -68,6 +65,4 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       emit(OrderSuccessState());
     }
   }
-
-  
 }

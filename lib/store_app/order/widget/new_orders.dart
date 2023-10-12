@@ -18,7 +18,6 @@ class NewOrders extends StatefulWidget {
 
 class _NewOrdersState extends State<NewOrders> {
   late final OrderBloc bloc;
-  late final List<Order> orders;
 
   @override
   void initState() {
@@ -29,13 +28,11 @@ class _NewOrdersState extends State<NewOrders> {
 
   @override
   Widget build(BuildContext context) {
-    orders =
-        widget.orders.where((element) => element.acceptable == false).toList();
-    return orders.isNotEmpty
+    return widget.orders.isNotEmpty
         ? ListView.builder(
-            itemCount: orders.length,
+            itemCount: widget.orders.length,
             itemBuilder: (context, index) {
-              final order = orders[index];
+              final order = widget.orders[index];
               return OrderItem(order: order);
             },
           )

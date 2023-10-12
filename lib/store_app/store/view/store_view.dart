@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:store_app/core/constances/media_const.dart';
+import 'package:store_app/core/services/common.dart';
 import 'package:store_app/core/shared/empty_data.dart';
 import 'package:store_app/store_app/cart/repository/cart_repository.dart';
 import 'package:store_app/store_app/cart/views/cart_page.dart';
@@ -36,6 +37,7 @@ class _StoreViewState extends State<StoreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: Common.storesScaffold,
       body: Column(
         children: [
           Expanded(
@@ -157,7 +159,7 @@ class _StoreViewState extends State<StoreView> {
           ElevatedButton.icon(
             onPressed: () {
               Navigator.push(
-                context,
+                Common.scaffoldState.currentContext!,
                 MaterialPageRoute(
                   builder: (_) => CartPage(cartRepository: CartRepository()),
                 ),

@@ -61,6 +61,8 @@ class _AuthSignUpViewState extends State<AuthSignUpView> {
                       ),
                     ),
                     vSpace(5),
+                    const _Name(),
+                    vSpace(2),
                     const _Email(),
                     vSpace(2),
                     const _Password(),
@@ -158,6 +160,36 @@ class _Email extends StatelessWidget {
               labelText: trans(context).email,
               errorText:
                   state.email.displayError != null ? 'invalid email' : null,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  TextDirection directionField(BuildContext context) =>
+      locale(context) ? TextDirection.rtl : TextDirection.ltr;
+}
+
+class _Name extends StatelessWidget {
+  const _Name();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<AuthCubit, AuthState>(
+      buildWhen: (previous, next) => previous.name != next.name,
+      builder: (context, state) {
+        return Container(
+          margin: EdgeInsets.symmetric(horizontal: 5.w),
+          child: TextField(
+            textDirection: directionField(context),
+            key: const Key('email-input'),
+            onChanged: (email) => context.read<AuthCubit>().nameChanged(email),
+            decoration: InputDecoration(
+              prefixIcon: const Icon(Icons.person),
+              labelText: trans(context).fullName,
+              errorText:
+                  state.email.displayError != null ? 'invalid name' : null,
             ),
           ),
         );

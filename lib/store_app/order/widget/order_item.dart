@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
+import 'package:store_app/core/shared/outlined_text.dart';
+import 'package:store_app/core/theme/colors/landk_colors.dart';
 
 import '../../../core/tools/tools_widget.dart';
 import '../bloc/order_bloc.dart';
@@ -72,7 +74,16 @@ class _OrderItemState extends State<OrderItem> {
                     ),
                   ],
                 ),
-               
+                ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: widget.order.acceptable ? green : orange,
+                    foregroundColor: widget.order.acceptable ? white : black,
+                  ),
+                  child: Text(widget.order.acceptable
+                      ? trans(context).tracking
+                      : trans(context).noDelivered),
+                )
               ],
             ),
           ),

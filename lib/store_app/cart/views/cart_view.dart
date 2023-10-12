@@ -35,7 +35,11 @@ class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Common.storesScaffold.currentState == null ? null : AppBar(),
+      appBar: Common.storesScaffold.currentContext == null
+          ? null
+          : AppBar(
+              title: Text(trans(context).cart),
+            ),
       body: Column(
         children: [
           BlocBuilder<CartBloc, CartState>(

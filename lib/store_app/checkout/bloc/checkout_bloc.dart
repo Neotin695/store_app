@@ -14,7 +14,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
       (PlaceOrder event, emit) async {
         emit(CheckoutLoading());
        
-        await repository.placeOrder(event.cart).then((value) {
+        await repository.placeOrder(event.cart,event.cachType).then((value) {
           emit(CheckoutSuccess());
         });
       },

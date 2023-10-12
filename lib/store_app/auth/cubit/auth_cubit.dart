@@ -1,6 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:formz/formz.dart';
+import 'package:store_app/models/customer.dart';
+import 'package:store_app/models/model.dart';
 
 import '../../../core/services/form_input/form_input.dart';
 import '../../../core/services/form_input/src/address.dart';
@@ -23,6 +27,21 @@ class AuthCubit extends Cubit<AuthState> {
         email: email,
         isValid: Formz.validate([
           email,
+          state.password,
+        ]),
+      ),
+    );
+  }
+
+  void nameChanged(String value) {
+    final name = Name.dirty(value);
+
+    emit(
+      state.copyWith(
+        name: name,
+        isValid: Formz.validate([
+          name,
+          state.email,
           state.password,
         ]),
       ),
@@ -97,11 +116,29 @@ class AuthCubit extends Cubit<AuthState> {
     if (!state.isValid) return;
     emit(state.copyWith(status: FormzSubmissionStatus.inProgress));
     try {
-      await _authenticationRepository.signUpWithEmailAndPassowrd(
+      await _authenticationRepository
+          .signUpWithEmailAndPassowrd(
         email: state.email.value,
         password: state.password.value,
-      );
-      emit(state.copyWith(status: FormzSubmissionStatus.success));
+      )
+          .then((value) async {
+        await FirebaseFirestore.instance
+            .collection('customers')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .set(Customer(
+                id: FirebaseAuth.instance.currentUser!.uid,
+                active: true,
+                name: state.name.value,
+                photoUrl: '',
+                email: state.email.value,
+                isEmailVerified: false,
+                phoneNum: state.phone.value,
+                location: AddressInfo.empty(),
+                token: '',
+                orders: const []).toMap())
+            .then((value) =>
+                emit(state.copyWith(status: FormzSubmissionStatus.success)));
+      });
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       emit(
         state.copyWith(

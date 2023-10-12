@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 
 import '../../../../../models/model.dart';
@@ -84,5 +85,31 @@ class Customer extends Equatable {
         isEmailVerified: map['isEmailVerified'] as bool,
         location: AddressInfo.fromMap(map['location'] as Map<String, dynamic>),
         orders: List<String>.from(map['orders'].map((e) => e)));
+  }
+
+  Customer copyWith({
+    String? id,
+    String? photoUrl,
+    String? name,
+    String? email,
+    String? phoneNum,
+    String? token,
+    bool? isEmailVerified,
+    bool? active,
+    AddressInfo? location,
+    List<String>? orders,
+  }) {
+    return Customer(
+      id: id ?? this.id,
+      photoUrl: photoUrl ?? this.photoUrl,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      phoneNum: phoneNum ?? this.phoneNum,
+      token: token ?? this.token,
+      isEmailVerified: isEmailVerified ?? this.isEmailVerified,
+      active: active ?? this.active,
+      location: location ?? this.location,
+      orders: orders ?? this.orders,
+    );
   }
 }

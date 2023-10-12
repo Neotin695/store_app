@@ -8,12 +8,7 @@ sealed class OrderEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _FetchAllOrders extends OrderEvent {
-  final List<Order> orders;
-  const _FetchAllOrders({
-    required this.orders,
-  });
-}
+class _FetchAllOrders extends OrderEvent {}
 
 class FetchOneOrder extends OrderEvent {
   final String id;
@@ -21,7 +16,6 @@ class FetchOneOrder extends OrderEvent {
     required this.id,
   });
 }
-
 
 class FetchDelegate extends OrderEvent {
   final String id;

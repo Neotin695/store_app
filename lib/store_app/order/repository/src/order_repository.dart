@@ -21,19 +21,20 @@ class OrderRepository implements _OrderRepository {
       : _firestore = fStore.FirebaseFirestore.instance,
         _auth = FirebaseAuth.instance;
 
- 
-
   @override
   Stream<List<Order>> fetchAllOrder() {
     try {
-      return _firestore.collection('orders').snapshots().map((event) {
+      return _firestore
+          .collection('orders')
+          .where('customer', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+          .snapshots()
+          .map((event) {
         return List<Order>.from(event.docs.map((e) => Order.fromMap(e.data())));
       });
     } catch (e) {
       return Stream.error(e);
     }
   }
-
 
   @override
   Future<Delegate> fetchDelegate(String id) async {
@@ -49,20 +50,13 @@ class OrderRepository implements _OrderRepository {
   @override
   Future<Order> fetchOneOrder(String id) async {
     try {
-      return Order.fromMap((await _firestore
-              .collection('stores')
-              .doc(_auth.currentUser!.uid)
-              .collection('orders')
-              .doc(id)
-              .get())
-          .data()!);
+      return Order.fromMap(
+          (await _firestore.collection('orders').doc(id).get()).data()!);
     } catch (e) {
       print('fetchOneOrder: $e');
       return Order.empty();
     }
   }
-
-
 
   @override
   Future<List<Product>> fetchAllProducts(List<String> ids) async {
