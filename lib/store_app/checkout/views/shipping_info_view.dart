@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
+import 'package:store_app/core/services/common.dart';
 import 'package:store_app/core/tools/tools_widget.dart';
 import 'package:store_app/store_app/checkout/bloc/checkout_bloc.dart';
 import 'package:store_app/store_app/checkout/views/pay_page.dart';
@@ -66,6 +67,29 @@ class _ShippingInfoViewState extends State<ShippingInfoView> {
                   ),
                   icon: Icon(
                     Icons.payment,
+                    color: black,
+                  ),
+                ),
+              ),
+              vSpace(2),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 5.w),
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    bloc.add(PlaceOrder(cart: Common.cart));
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: orange,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    minimumSize: Size(100.w, 7.h),
+                  ),
+                  label: Text(
+                    trans(context).cach,
+                    style: h4.copyWith(color: black),
+                  ),
+                  icon: Icon(
+                    Icons.money,
                     color: black,
                   ),
                 ),

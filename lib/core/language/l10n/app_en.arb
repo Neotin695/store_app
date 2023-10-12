@@ -102,5 +102,6 @@
   "pay": "Pay Now",
   "addressLine": "Address Line",
   "build": "Build Number",
+  "cach": "Cach",
   "signOut": "Sign out"
 }
