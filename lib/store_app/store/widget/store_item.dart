@@ -29,7 +29,7 @@ class _StoreItemState extends State<StoreItem> {
   @override
   void initState() {
     bloc = BlocProvider.of<StoreBloc>(context);
-    bloc.storeCategory
+    category = bloc.storeCategory
         .firstWhere((element) => element.id == widget.store.category);
     super.initState();
   }

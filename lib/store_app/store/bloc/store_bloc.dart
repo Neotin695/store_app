@@ -21,7 +21,6 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     on<AddToCart>(_addToCart);
     on<PopulateStoreCategory>(_populateStoreCategory);
     add(_FetchAllStores());
-    add(PopulateStoreCategory());
   }
   List<ProductQuantity> items = [];
   FutureOr<void> _addToCart(AddToCart event, emit) async {
@@ -30,15 +29,7 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
     ]));
   }
 
-  FutureOr<void> _populateStoreCategory(event, emit) async {
-    emit(StoreLoading());
-    await _repository.populateStoreCategory().then(
-      (value) {
-        storeCategory = value;
-        emit(StoreLoaded(stores: store));
-      },
-    );
-  }
+  FutureOr<void> _populateStoreCategory(event, emit) async {}
 
   List<Store> store = [];
 
@@ -58,8 +49,14 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
   FutureOr<void> _fetchAllStores(
       _FetchAllStores event, Emitter<StoreState> emit) async {
     emit(StoreLoading());
+    await _repository.populateStoreCategory().then(
+      (value) {
+        storeCategory = value;
+      },
+    );
     await emit.forEach(_repository.fetchStore(), onData: (data) {
       store = data;
+
       return StoreLoaded(stores: data);
     });
   }
