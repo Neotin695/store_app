@@ -24,18 +24,18 @@ class StoreItem extends StatefulWidget {
 
 class _StoreItemState extends State<StoreItem> {
   late final StoreBloc bloc;
+  StoreCategory category = StoreCategory.empty();
 
   @override
   void initState() {
     bloc = BlocProvider.of<StoreBloc>(context);
+    bloc.storeCategory
+        .firstWhere((element) => element.id == widget.store.category);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (bloc.storeCategory == StoreCategory.empty()) {
-      bloc.add(PopulateStoreCategory(categoryId: widget.store.category));
-    }
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -43,7 +43,7 @@ class _StoreItemState extends State<StoreItem> {
           MaterialPageRoute(
             builder: (_) => StorePage(
               store: widget.store,
-              category: bloc.storeCategory,
+              category: category,
               storeRepository: StoreRepository(),
             ),
           ),
@@ -120,9 +120,7 @@ class _StoreItemState extends State<StoreItem> {
                     ],
                   ),
                   Text(
-                    locale(context)
-                        ? bloc.storeCategory.nameAr
-                        : bloc.storeCategory.nameEn,
+                    locale(context) ? category.nameAr : category.nameEn,
                     style: h4,
                   ),
                 ],

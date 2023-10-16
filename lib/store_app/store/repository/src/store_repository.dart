@@ -16,7 +16,7 @@ abstract class _StoreRepository {
 
   Stream<List<Product>> fetchProductOfStore(String storeId);
 
-  Future<StoreCategory> populateStoreCategory(String categoryId);
+  Future<List<StoreCategory>> populateStoreCategory();
 }
 
 class StoreRepository extends _StoreRepository {
@@ -51,9 +51,10 @@ class StoreRepository extends _StoreRepository {
   }
 
   @override
-  Future<StoreCategory> populateStoreCategory(String categoryId) async {
-    return StoreCategory.fromMap(
-        (await _store.collection('category').doc(categoryId).get()).data()!);
+  Future<List<StoreCategory>> populateStoreCategory() async {
+    return List<StoreCategory>.from((await _store.collection('category').get())
+        .docs
+        .map((e) => StoreCategory.fromMap(e.data())));
   }
 
   @override

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
-import 'package:store_app/core/shared/outlined_text.dart';
 import 'package:store_app/core/theme/colors/landk_colors.dart';
 
 import '../../../core/tools/tools_widget.dart';

@@ -27,8 +27,5 @@ class AddToCart extends StoreEvent {
 }
 
 class PopulateStoreCategory extends StoreEvent {
-  final String categoryId;
-  const PopulateStoreCategory({
-    required this.categoryId,
-  });
+ 
 }
