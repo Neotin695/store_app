@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:store_app/store_app/maps/view/map_view.dart';
 
 import '../bloc/map_bloc.dart';
 import '../map_repository/src/map_repository.dart';
-import 'map_view.dart';
 
 class MapPage extends StatelessWidget {
   const MapPage({super.key, required this.mapRepository, required this.state});
