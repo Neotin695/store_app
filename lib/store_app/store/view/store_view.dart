@@ -30,7 +30,7 @@ class _StoreViewState extends State<StoreView> {
   @override
   void initState() {
     bloc = BlocProvider.of<StoreBloc>(context);
-
+    bloc.add(FetchAllProductsOfStore(storeId: widget.store.id));
     super.initState();
   }
 

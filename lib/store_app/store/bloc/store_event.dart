@@ -8,7 +8,7 @@ sealed class StoreEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class _FetchAllStores extends StoreEvent {}
+class FetchAllStores extends StoreEvent {}
 
 class FetchAllProductsOfStore extends StoreEvent {
   final String storeId;
@@ -26,6 +26,4 @@ class AddToCart extends StoreEvent {
   });
 }
 
-class PopulateStoreCategory extends StoreEvent {
- 
-}
+class PopulateStoreCategory extends StoreEvent {}

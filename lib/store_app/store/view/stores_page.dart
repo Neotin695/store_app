@@ -18,7 +18,7 @@ class StoresPage extends StatelessWidget {
     return RepositoryProvider.value(
       value: storeRepository,
       child: BlocProvider(
-        create: (context) => StoreBloc(storeRepository),
+        create: (context) => StoreBloc(storeRepository)..add(FetchAllStores()),
         child: const StoresView(),
       ),
     );

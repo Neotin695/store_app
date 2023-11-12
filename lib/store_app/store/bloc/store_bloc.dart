@@ -15,12 +15,11 @@ part 'store_state.dart';
 
 class StoreBloc extends Bloc<StoreEvent, StoreState> {
   StoreBloc(this._repository) : super(StoreInitial()) {
-    on<_FetchAllStores>(_fetchAllStores);
+    on<FetchAllStores>(_fetchAllStores);
     on<FetchAllProductsOfStore>(_fetchAlllProductsOfStore);
     on<AddReview>((AddReview event, emit) {});
     on<AddToCart>(_addToCart);
     on<PopulateStoreCategory>(_populateStoreCategory);
-    add(_FetchAllStores());
   }
   List<ProductQuantity> items = [];
   FutureOr<void> _addToCart(AddToCart event, emit) async {
@@ -47,7 +46,7 @@ class StoreBloc extends Bloc<StoreEvent, StoreState> {
   List<StoreCategory> storeCategory = [];
 
   FutureOr<void> _fetchAllStores(
-      _FetchAllStores event, Emitter<StoreState> emit) async {
+      FetchAllStores event, Emitter<StoreState> emit) async {
     emit(StoreLoading());
     await _repository.populateStoreCategory().then(
       (value) {
