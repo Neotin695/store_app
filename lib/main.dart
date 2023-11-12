@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/services/common.dart';
-import 'firebase_options.dart';
+import 'core/services/firebase_options.dart';
 import 'store_app/app/app.dart';
 import 'store_app/auth/repository/authentication_repository.dart';
 
