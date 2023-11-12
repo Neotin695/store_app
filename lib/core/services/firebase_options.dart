@@ -50,19 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnO0YYdt_qFW_WwuHFlMCiJM-t31PUu7M',
-    appId: '1:189463239788:android:d301ee03332b6961ff4c49',
-    messagingSenderId: '189463239788',
-    projectId: 'landk-d29f0',
-    storageBucket: 'landk-d29f0.appspot.com',
+    apiKey: 'AIzaSyChAKRxKbaJouHR2b-jPEa_zzLpNccyw88',
+    appId: '1:662186870563:android:9c4100eec0d933a9472e96',
+    messagingSenderId: '662186870563',
+    projectId: 'auxillium-79120',
+    storageBucket: 'auxillium-79120.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD7OgdZiN_qQPYE1UPSneiItahyDnQ4W-o',
-    appId: '1:189463239788:ios:c093b731193476fbff4c49',
-    messagingSenderId: '189463239788',
-    projectId: 'landk-d29f0',
-    storageBucket: 'landk-d29f0.appspot.com',
+    apiKey: 'AIzaSyAnGuULqxGc-6v8s9PPBPsJ5EChfHB82II',
+    appId: '1:662186870563:ios:18469783c49111c0472e96',
+    messagingSenderId: '662186870563',
+    projectId: 'auxillium-79120',
+    storageBucket: 'auxillium-79120.appspot.com',
+    androidClientId: '662186870563-ah597vg7bov2t2mmkq054sdh2rd6gpiq.apps.googleusercontent.com',
+    iosClientId: '662186870563-jkuob314drc4lon80h92aq58ro6juv8h.apps.googleusercontent.com',
     iosBundleId: 'mehani.sim.storeApp',
   );
 }
